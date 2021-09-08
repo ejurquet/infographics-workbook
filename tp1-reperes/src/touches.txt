@@ -1,0 +1,29 @@
+Touches possibles :
+    q:  Quitter l'application
+    x:  Activer/désactiver l'affichage des axes
+    i:  Réinitiliaser le point de vue et l'hélicoptère
+    g:  Permuter l'affichage en fil de fer ou plein
+    c:  Permuter l'affichage des faces arrières
+    l:  Utiliser LookAt ou Translate+Rotate pour placer la caméra
+    m:  Choisir le modèle affiché: cube, théière
+    MOINS:  Reculer la caméra
+    PLUS:  Avancer la caméra
+    DROITE:  Déplacer l'hélicoptère vers +X
+    GAUCHE:  Déplacer l'hélicoptère vers -X
+    HAUT:  Déplacer l'hélicoptère vers +Y
+    BAS:  Déplacer l'hélicoptère vers -Y
+    PAGEPREC:  Déplacer l'hélicoptère vers +Z
+    PAGESUIV:  Déplacer l'hélicoptère vers -Z
+    f:  Diminuer la taille de la tête
+    r:  Augmenter la taille de la tête
+    VIRGULE:  Diminuer l'angle de rotation de l'hélicoptère
+    POINT:  Augmenter l'angle de rotation de l'hélicoptère
+    o:  Diminuer l'angle des pattes
+    p:  Augmenter l'angle des pattes
+    j:  Diminuer l'angle des pales
+    u:  Augmenter l'angle des pales
+    b:  Incrémenter la dimension de la boite
+    h:  Décrémenter la dimension de la boite
+    ESPACE:  Mettre en pause ou reprendre l'animation
+    s:  Sauvegarder une copie de la fenêtre dans un fichier
+    BOUTON_GAUCHE:  Déplacer (modifier angles) la caméra
