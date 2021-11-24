@@ -1,0 +1,34 @@
+Touches possibles :
+    q:  Quitter l'application
+    x:  Activer/désactiver l'affichage des axes
+    9:  Permuter l'utilisation des nuanceurs de tessellation
+    v:  Recharger les fichiers des nuanceurs et recréer le programme
+    p:  Alterner entre le modèle d'illumination: Gouraud, Phong
+    r:  Alterner entre le modèle de réflexion spéculaire: Phong, Blinn
+    d:  Alterner entre le modèle de spot: OpenGL, Direct3D
+    h:  Incrémenter le coefficient de brillance
+    b:  Décrémenter le coefficient de brillance
+    c:  Incrémenter l'angle d'ouverture du cône du spot
+    f:  Décrémenter l'angle d'ouverture du cône du spot
+    w:  Incrémenter l'exposant du spot
+    s:  Décrémenter l'exposant du spot
+    m:  Choisir le modèle affiché: cube, tore, sphère, théière, cylindre, cône
+    t:  Choisir la texture de couleurs utilisée: aucune, Terre, échiquier, mur, métal, mosaique
+    e:  Choisir la texture de normales utilisée: aucune, pierre, bulles, mur, brique, circuit
+    i:  Augmenter le niveau de tessellation interne
+    k:  Diminuer le niveau de tessellation interne
+    o:  Augmenter le niveau de tessellation externe
+    l:  Diminuer le niveau de tessellation externe
+    u:  Augmenter les deux niveaux de tessellation
+    j:  Diminuer les deux niveaux de tessellation
+    BARREOBLIQUE:  Permuter la projection: perspective ou orthogonale
+    g:  Permuter l'affichage en fil de fer ou plein
+    n:  Utiliser ou non les normales calculées comme couleur (pour le débogage)
+    0:  Replacer Caméra et Lumière afin d'avoir une belle vue
+    z:  Remettre le temps à 0
+    a:  Le temps avance ou est à l'arrêt
+    ESPACE:  Permuter la rotation automatique du modèle
+    BOUTON_GAUCHE:  Tourner l'objet
+    BOUTON_MILIEU:  Modifier l'orientation du spot
+    BOUTON_DROIT:  Déplacer la lumière
+    Molette:  Changer la taille du spot
