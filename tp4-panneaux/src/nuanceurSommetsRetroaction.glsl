@@ -74,7 +74,7 @@ void main( void )
         ColorMod = Color;
 
         // gérer la collision avec la demi-sphère
-        // Mettre à l'échelle la position de la particule
+        // mettre à l'échelle la position de la particule
         vec3 posSphUnitaire = VertexMod / bDim;
         // Multiplier chaque composante de la vitesse par la dimension correspondante de la demi-sphère
         vec3 vitSphUnitaire = vitesseMod * bDim;
@@ -82,20 +82,26 @@ void main( void )
         if (dist >= 1.0) // la particule est sortie de la bulle
         {
             VertexMod = ( 2.0 - dist ) * VertexMod;
-            vec3 N = posSphUnitaire / dist; // normaliser N
+            // Normaliser N
+            vec3 N = posSphUnitaire / dist;
+            // Réfléchir la vitesse
             vec3 vitReflechieSphUnitaire = reflect( vitSphUnitaire, N );
             vitesseMod = vitReflechieSphUnitaire / bDim;
+            // Vitesse divisée par 2
+            vitesseMod /= 2.0;
         }
 
         // gérer la collision avec le sol
-        const float hauteurPlancher = 0.0;  // hauteur minimale à laquelle une collision avec le plancher survient
+        float hauteurPlancher = 0.5 * pointsize;  // hauteur minimale à laquelle une collision avec le plancher survient
         // la particule est-elle en collision avec le plancher ?
         if ( VertexMod.z < hauteurPlancher )
         {
             // Ramener la particule au sol
-            VertexMod.z = -VertexMod.z;
+            VertexMod.z = hauteurPlancher + (hauteurPlancher - VertexMod.z);
             // Inverser la vitesse verticale de la particule
             vitesseMod.z = - vitesseMod.z;
+            // Vitesse divisée par 2
+            vitesseMod /= 2.0;
         }
 
         // appliquer la gravité

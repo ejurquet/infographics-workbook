@@ -6,13 +6,21 @@ layout(triangle_strip, max_vertices = 4) out;
 uniform mat4 matrProj;
 
 uniform int texnumero;
-//uniform float tempsDeVieMax;
+
+layout (std140) uniform varsUnif
+{
+    float tempsDeVieMax;       // temps de vie maximal (en secondes)
+    float temps;               // le temps courant dans la simulation (en secondes)
+    float dt;                  // intervalle entre chaque affichage (en secondes)
+    float gravite;             // gravité utilisée dans le calcul de la position de la particule
+    float pointsize;           // taille des points (en pixels)
+};
 
 in Attribs {
     vec4 couleur;
     float tempsDeVieRestant;
-    //float sens; // du vol (partie 3)
-    //float hauteur; // de la particule dans le repère du monde (partie 3)
+    float sens; // du vol (partie 3)
+    float hauteur; // de la particule dans le repère du monde (partie 3)
 } AttribsIn[];
 
 out Attribs {
@@ -38,7 +46,7 @@ void main()
         vec2 decalage = coins[i]; // on positionne successivement aux quatre coins
 
         // Tournoiement du flocon
-        if (texnumero == 2) {
+        if (texnumero == 2 && AttribsIn[0].hauteur >= hauteurInerte) {
             // Calculer la matrice de rotation pour faire tourner le flocon autour de son centre (axe x)
             mat2 matrRot = mat2( cos(6.0 * AttribsIn[0].tempsDeVieRestant), sin(6.0 * AttribsIn[0].tempsDeVieRestant),
                                 -sin(6.0 * AttribsIn[0].tempsDeVieRestant), cos(6.0 * AttribsIn[0].tempsDeVieRestant) );
@@ -54,6 +62,10 @@ void main()
 
         // assigner la couleur courante
         AttribsOut.couleur = AttribsIn[0].couleur;
+        // Faire fondre les lutins en fin de vie
+        if (AttribsIn[0].tempsDeVieRestant < 4.0) {
+            AttribsOut.couleur.a = AttribsIn[0].couleur.a - ( (4.0 - AttribsIn[0].tempsDeVieRestant) / 4.0 ) * AttribsIn[0].couleur.a;
+        }
 
         // fixer les coordonnées de texture    
         AttribsOut.texCoord = coins[i] + vec2( 0.5, 0.5 );   // on utilise coins[] pour définir des coordonnées de texture
@@ -61,8 +73,12 @@ void main()
         // Vol de l'oiseau
         if (texnumero == 1) {
             const float nlutins = 16.0; // 16 positions de vol dans la texture
-            int num = int( mod( 18.0 * AttribsIn[0].tempsDeVieRestant, nlutins));    // 18 Hz
-            AttribsOut.texCoord.s = ( AttribsOut.texCoord.s + num) / nlutins;
+            int num = 8;    // la frame 8 est donnée par défaut
+            // Si on est au dessus de la hauteur d'inerte, on donne la bonne frame
+            if (AttribsIn[0].hauteur >= hauteurInerte) {
+                num = int( mod( 18.0 * AttribsIn[0].tempsDeVieRestant, nlutins));    // 18 Hz
+            }
+            AttribsOut.texCoord.s = ( AttribsIn[0].sens * AttribsOut.texCoord.s + num) / nlutins;
         }
 
         EmitVertex();

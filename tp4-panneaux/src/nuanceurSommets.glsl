@@ -2,7 +2,6 @@
 
 uniform mat4 matrModel;
 uniform mat4 matrVisu;
-//uniform mat4 matrProj;
 
 layout (std140) uniform varsUnif
 {
@@ -21,8 +20,8 @@ layout(location=5) in float tempsDeVieRestant;
 out Attribs {
     vec4 couleur;
     float tempsDeVieRestant;
-    //float sens; // du vol (partie 3)
-    //float hauteur; // de la particule dans le repère du monde (partie 3)
+    float sens; // du vol (partie 3)
+    float hauteur; // de la particule dans le repère du monde (partie 3)
 } AttribsOut;
 
 void main( void )
@@ -30,6 +29,7 @@ void main( void )
     // transformation standard du sommet, ** sans la projection **
     gl_Position = matrVisu * matrModel * Vertex;
 
+    // assigner le temps de vie restant à la sortie
     AttribsOut.tempsDeVieRestant = tempsDeVieRestant;
 
     // couleur du sommet
@@ -38,6 +38,10 @@ void main( void )
     // assigner la taille des points (en pixels)
     gl_PointSize = pointsize;
 
-    if ( tempsDeVieRestant < 0.0 ) { AttribsOut.couleur.rgb += 0.00001*vitesse; AttribsOut.couleur.a += 0.00001; }
+    // calculer la hauteur de la particule dans le repère du monde
+    AttribsOut.hauteur = (matrModel * Vertex).z;
+
+    // calculer le signe du sens selon la vitesse en y
+    AttribsOut.sens = sign( vitesse.y );
 
 }
